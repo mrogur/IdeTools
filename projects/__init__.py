@@ -1,1 +1,1 @@
-__all__ = ['project', 'PhpProject']
+__all__ = ['Project', 'PhpProject']
