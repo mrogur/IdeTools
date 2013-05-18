@@ -21,6 +21,7 @@ class Project(object):
 
 	def assign_name(self, name):
 		if self.check_name(name): 
+			print(name)
 			self.project_name = name
 			self.make_project()
 		else:
@@ -31,4 +32,11 @@ class Project(object):
 		return re.match(r'^[a-zA-Z]\w+$',name)	
 
 	def make_project(self):
-		print (self.project_data['folders'][0]['path'])		
+		path = self.project_data['folders'][0]['path']
+		print(self.project_name)
+		projectPath = os.path.join(path, self.project_name)
+		print(projectPath)
+		self.project_data['folders'][0]['path'] = projectPath
+
+		print (self.project_data)
+
