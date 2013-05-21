@@ -4,6 +4,26 @@
 		"selected_items":
 		[
 			[
+				"tem",
+				"templateName"
+			],
+			[
+				"sublime",
+				"sublime-settings"
+			],
+			[
+				"project",
+				"projectName"
+			],
+			[
+				"IdeT",
+				"IdeToolsConfig"
+			],
+			[
+				"Ide",
+				"IdeToolsConfig"
+			],
+			[
 				"che",
 				"check_name"
 			],
@@ -28,10 +48,21 @@
 	"buffers":
 	[
 		{
-			"file": "projects/project.py",
+			"contents": "import sublime, sublime_plugin, os, sys, re\n\nfrom .Project import Project\n\nclass PhpProject(Project):\n    # def __init__(self, window):\n    #     super().__init__(window)\n    pass\n",
+			"file": "projects/PhpProject.py",
+			"file_size": 180,
+			"file_write_time": 130133674630000000,
 			"settings":
 			{
-				"buffer_size": 957,
+				"buffer_size": 180,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "helpers/JsonSettings.py",
+			"settings":
+			{
+				"buffer_size": 1393,
 				"line_ending": "Unix"
 			}
 		},
@@ -39,23 +70,39 @@
 			"file": "IdeTools.py",
 			"settings":
 			{
-				"buffer_size": 360,
+				"buffer_size": 939,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "projects/__init__.py",
+			"file": "templates/php/composer/composer.json",
 			"settings":
 			{
-				"buffer_size": 22,
+				"buffer_size": 0,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "__init__.py",
+			"file": "templates/php/composer/phpunit.xml",
 			"settings":
 			{
-				"buffer_size": 29,
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "templates/php/composer/bootstrap.php",
+			"settings":
+			{
+				"buffer_size": 0,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "helpers/TemplateLoader.py",
+			"settings":
+			{
+				"buffer_size": 649,
 				"line_ending": "Unix"
 			}
 		}
@@ -63,16 +110,24 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 375.0,
+		"height": 205.0,
 		"selected_items":
 		[
 			[
-				"pac",
+				"rem",
 				"Package Control: Remove Package"
 			],
 			[
 				"install",
 				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Upgrade Package"
+			],
+			[
+				"pac",
+				"Package Control: Remove Package"
 			],
 			[
 				"Package Control: insta",
@@ -83,9 +138,21 @@
 	},
 	"console":
 	{
-		"height": 125.0,
+		"height": 235.0,
 		"history":
 		[
+			"window.run_command('ide_tools')",
+			"window.run_command('create_php_project')",
+			"os.system('clear')",
+			"import os",
+			"os.system('clear')",
+			"window.run_command('ide_tools')",
+			"window.run_command('create_php_project')",
+			"window.run_command('create_project')",
+			"view.run_command('create_project')",
+			"view.window().run_command('create_project')",
+			"view.run_command('create_project')",
+			"view.window().run_command('create_project')",
 			"view.run_command('create_project')",
 			"view.window().run_command('create_project')",
 			"view.run_command('create_project')",
@@ -120,13 +187,25 @@
 	},
 	"file_history":
 	[
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/plan.txt",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/Default (OSX).sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/JsonSettings.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeTools.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/Project.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer.json",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/bootstrap.php",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/phpunit.xml",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/Default/Default (OSX).sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeToolsConfig.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/__init__.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/__init__.py",
+		"/Volumes/DATA/soft/AUTODESK_SKETCHBOOK_PRO_FOR_ENTERPRISE_MULTI_2014_MACOSX-XFORCE/x-force.nfo",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/project.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Settings/SideBarEnhancements.json",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/LiveReload/LiveReload.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/LiveReload.sublime-settings",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/__init__.py",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/project.py",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeTools.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/pathutil/pathutil.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/project/project.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
@@ -138,20 +217,37 @@
 	],
 	"find":
 	{
-		"height": 27.0
+		"height": 37.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 95.0,
 		"where_history":
 		[
+			"<project>"
 		]
 	},
 	"find_state":
 	{
-		"case_sensitive": false,
+		"case_sensitive": true,
 		"find_history":
 		[
+			"data",
+			"_data",
+			"IdeToolsConfig",
+			"projects",
+			"IdeTools.projects.Project",
+			"projectPath",
+			"make_project",
+			"check_name",
+			"project_name",
+			"load_settings",
+			"assign_name",
+			"load_settings",
+			"prompt_name",
+			"projectData",
+			"project_data",
+			"project",
 			")	",
 			"loadSettings",
 			"PhpProject",
@@ -165,40 +261,40 @@
 		"regex": false,
 		"replace_history":
 		[
+			"Project"
 		],
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 6,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "projects/project.py",
+					"file": "projects/PhpProject.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 957,
+						"buffer_size": 180,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								926,
-								926
+								175,
+								175
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Python/Python.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -208,51 +304,55 @@
 				},
 				{
 					"buffer": 1,
-					"file": "IdeTools.py",
+					"file": "helpers/JsonSettings.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 360,
+						"buffer_size": 1393,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								316,
-								316
+								610,
+								610
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 74.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 2,
-					"file": "projects/__init__.py",
+					"file": "IdeTools.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 22,
+						"buffer_size": 939,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22,
-								22
+								546,
+								546
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -262,19 +362,100 @@
 				},
 				{
 					"buffer": 3,
-					"file": "__init__.py",
+					"file": "templates/php/composer/composer.json",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 29,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14,
-								14
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "templates/php/composer/phpunit.xml",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/XML/XML.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "templates/php/composer/bootstrap.php",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 0,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/PHP/PHP.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "helpers/TemplateLoader.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 649,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								624,
+								624
 							]
 						],
 						"settings":
@@ -332,6 +513,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"",
+				"helpers/TemplateLoader.py"
+			],
+			[
+				"jso",
+				"helpers/JsonSettings.py"
+			]
 		],
 		"width": 0.0
 	},
@@ -345,11 +534,11 @@
 	},
 	"select_symbol":
 	{
-		"height": 0.0,
+		"height": 375.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 378.0
 	},
 	"settings":
 	{
@@ -358,7 +547,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 241.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

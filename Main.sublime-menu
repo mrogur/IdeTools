@@ -1,0 +1,25 @@
+[
+    {
+        "id": "project",
+        "children":
+        [ 
+        {
+            "caption":"IdeTools",
+            "children":
+            [
+                {
+                    "caption": "IdeTools",
+                    "command": "ide_tools",
+                    "args": {
+                        "file": "${packages}/IdeTools/IdeTools.sublime-settings"
+                    }
+                }
+
+
+            ]
+
+        }
+        ]    
+    }
+]
+

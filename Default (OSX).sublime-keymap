@@ -1,0 +1,4 @@
+[
+    {"keys": ["super+alt+control+x"], "command": "ide_tools"},
+    {"keys": ["super+alt+control+z"], "command": "create_php_project"}
+]

@@ -1,5 +1,8 @@
 import sublime, sublime_plugin, os, sys, re, json
 
+from ..helpers.JsonSettings import JsonSettings
+
+
 class Project(object):
 	def __init__(self, window):
 		self.window = window
@@ -7,6 +10,7 @@ class Project(object):
 		self.projectData = None
 		self.projectName = None
 		self.projectPath = None
+		#self.config = IdeToolsConfig()
 	def create(self):		
 		self.window.run_command("prompt_open_folder")
 		self.window = sublime.active_window()
@@ -40,16 +44,17 @@ class Project(object):
 		try: 
 			os.mkdir(self.projectPath)
 			self.projectData['folders'][0]['path'] = self.projectPath
-			os.chdir(self.projectPath)
-
-			with open(self.projectName+'.sublime-project', encoding='utf-8', mode='w+') as file:
-				print("file created now")
-				file.write(json.dumps(self.projectData, indent=4, separators=(',', ': ')))
-				file.close()
-			sublime.active_window().set_project_data(self.projectData)
+			#os.chdir(self.projectPath)
+			jsonSettings = JsonSettings(
+				path=os.path.join(self.projectPath, self.projectName+'.sublime-settings'),
+				data=self.projectData
+			)
+			jsonSettings.save()
 			self.openProject()	
 		except OSError as e:
-			print (e.errno)
+			print (e)
 
 	def openProject(self):
+		sublime.active_window().set_project_data(self.projectData)
+		print("project created")
 		print(sublime.active_window().project_data())

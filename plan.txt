@@ -1,0 +1,27 @@
+1. Konfiguracja menu
+2. Wczytywanie templatek
+3. Parsowanie templatek
+4. Namespaces
+5. Setters getters
+6. Implement methods
+7. Autocompletion
+
+
+
+Hackin Sublime Text 3
+
+
+SublimeText is powerful text editor extremely useful for writing code. It's not free, but at cost of couple of bucks you get fast, highly customisable and pretty looking environment. Definitely it's worth of his price.
+
+With Sublime Text you also get Python API to write your own plugins. With this book you learn how to 
+write Sublime Text plugins from scratch. 
+
+Who this book is for?
+
+Many plugins developers starts learning Python by writing their first  SublimeText plugin. If you don't program in Python before, but you have experience with other object oriented programming languages don't worry I'll give you Python crash course.  In other side if you've never programming before this book can be chalenge for you but I try to explain code as simple as possible. 
+
+So let's start to write our first plugin.
+
+
+
+
