@@ -1,4 +1,4 @@
-import sublime, sublime_plugin, os, sys, re, json
+import sublime, sublime_plugin, os, sys,  json
 
 from ..helpers.JsonSettings import JsonSettings
 
@@ -8,6 +8,7 @@ class Project(object):
 		self.window = window
 		self.settings = self.loadSettings()
 		self.projectData = None
+		self.projectFolder = None
 		self.projectName = None
 		self.projectPath = None
 		#self.config = IdeToolsConfig()
@@ -21,23 +22,28 @@ class Project(object):
 		return sublime.load_settings('IdeTools.sublime-settings')
 
 	def promptName(self, name=''):
-		self.window.show_input_panel("Project name:",name,self.assignName, None, None)
+		self.window.show_input_panel("Project name:",name,self.promptFolder, None, None)
+		
+	def promptFolder(self, name):
+		self.projectName = name	
+		self.window.show_input_panel("Project folder:",'',self.assignFolderName, None, None)
 
-	def assignName(self, name):
-		if self.checkName(name): 
-			print(name)
-			self.projectName = name
+	def assignFolderName(self, name):
+		if re.match(r'^[a-zA-Z]\w+$',name): 
+			self.projectFolder = name
 			self.makeProject()
 		else:
-			sublime.message_dialog("Project name must not have spaces")
+			sublime.message_dialog("Project fol must not have spaces")
 			self.promptName(name)			
 
 	def checkName(self, name):
+		if name=='':
+			return name
 		return re.match(r'^[a-zA-Z]\w+$',name)	
 
 	def makeProject(self):
 		path = self.projectData['folders'][0]['path']
-		self.projectPath = os.path.join(path, self.projectName)
+		self.projectPath = os.path.join(path, self.projectFolder)
 		self.saveProject()
 
 	def saveProject(self):

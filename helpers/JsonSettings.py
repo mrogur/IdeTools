@@ -19,7 +19,7 @@ class JsonSettings:
             raise e
         else:
             try:
-                self.data = json.load(file)
+                self._data = json.load(file)
             except ValueError as e:
                 raise e
 
@@ -43,7 +43,10 @@ class JsonSettings:
     @data.setter
     def data(self, data):
         try:
-            data = json.loads(data)
+            if isinstance(data, dict):
+                self._data = data
+            elif isinstance(data, basestring):    
+                data = json.loads(data)
             self._data = data            
         except ValueError as e:
             print("Not valid json")    
