@@ -47,6 +47,8 @@ class JsonSettings:
                 self._data = data
             elif isinstance(data, basestring):    
                 data = json.loads(data)
+            else:
+                raise ValueError("Data must be string or dictionary")    
             self._data = data            
         except ValueError as e:
             print("Not valid json")    

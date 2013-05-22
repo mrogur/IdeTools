@@ -19,13 +19,29 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
 #Cut here
     class AskChainItem(object):
         def __init__(self, prompt, key, default='', validatorCallback=None):
-            def emptyValidator(name):
-                print(name)
-                return True
+                
 
             self.prompt = prompt
             self.key = key
             self.default = default
+            self.listMode = False
+
+            if isinstance(default, list):
+                self.listMode = True
+
+            def emptyValidator(name):
+                print(name)
+                return True
+
+            def listValidator(value):
+                try:
+                    x = self.default[value]
+                    return True
+                except IndexError:
+                    return False    
+
+            if self.listMode: 
+                validatorCallback = listValidator 
 
             self.validatorCallback = validatorCallback if hasattr(validatorCallback, '__call__') else emptyValidator
 
@@ -51,7 +67,10 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
                     self.counter += 1
                     item = self.commands[self.counter]
 
-                self.showInputPanel(item, self.call)
+                if item.listMode:
+                    self.showQuickPanel(item, self.call)
+                else:
+                    self.showInputPanel(item, self.call)
 
             except IndexError as e:
                 self.onFinishCallback(self.result) 
@@ -59,7 +78,10 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
         def showInputPanel(self, item, cb):
             self.window.show_input_panel(item.prompt, item.default, cb, None, None)        
 
-            
+        def showQuickPanel(self, item, cb):
+            sublime.set_timeout(lambda: self.window.show_quick_panel(item.default, cb), 10)    
+
+
 
         def run(self):
             if not len(self.commands):
@@ -84,6 +106,8 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
         chain = self.AskChain(self.window, mu)
         chain.add("First", "key", "ciułała")
         chain.add("Second", "key3", "kardaśmon", vc)
+        chain.add("Third", "ming", ['first','second', 'third'])
+        chain.add("Select focus", "key5", ['lick','second', 'third'])
         chain.run()
 
 
