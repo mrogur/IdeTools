@@ -9,6 +9,7 @@ imp.reload(IdeTools.helpers.JsonSettings)
 from .projects.Project import Project
 from .projects.PhpProject import PhpProject
 from .helpers.JsonSettings import JsonSettings
+from .helpers.AskChain import AskChain
 
 class CreateProjectCommand(sublime_plugin.WindowCommand):
     def run(self):
@@ -16,96 +17,18 @@ class CreateProjectCommand(sublime_plugin.WindowCommand):
         tools.create()
 
 class IdeToolsCommand(sublime_plugin.WindowCommand):
-#Cut here
-    class AskChainItem(object):
-        def __init__(self, prompt, key, default='', validatorCallback=None):
-                
-
-            self.prompt = prompt
-            self.key = key
-            self.default = default
-            self.listMode = False
-
-            if isinstance(default, list):
-                self.listMode = True
-
-            def emptyValidator(name):
-                print(name)
-                return True
-
-            def listValidator(value):
-                try:
-                    x = self.default[value]
-                    return True
-                except IndexError:
-                    return False    
-
-            if self.listMode: 
-                validatorCallback = listValidator 
-
-            self.validatorCallback = validatorCallback if hasattr(validatorCallback, '__call__') else emptyValidator
-
-    class AskChain(object):
-        def __init__(self, window, onFinishCallback):
-            self.window = window
-            self.commands = []
-            self.counter = 0
-            self.result = {}
-            self.onFinishCallback = onFinishCallback
-            
-        def add(self, prompt, key, default='', validatorCallback=None):
-            item = IdeToolsCommand.AskChainItem(prompt, key, default, validatorCallback)
-            self.commands.append(item)
-
-        def call(self,value):
-            try:
-                item = self.commands[self.counter]
-
-                validation = item.validatorCallback(value)
-                if validation:
-                    self.result[item.key] = value
-                    self.counter += 1
-                    item = self.commands[self.counter]
-
-                if item.listMode:
-                    self.showQuickPanel(item, self.call)
-                else:
-                    self.showInputPanel(item, self.call)
-
-            except IndexError as e:
-                self.onFinishCallback(self.result) 
-
-        def showInputPanel(self, item, cb):
-            self.window.show_input_panel(item.prompt, item.default, cb, None, None)        
-
-        def showQuickPanel(self, item, cb):
-            sublime.set_timeout(lambda: self.window.show_quick_panel(item.default, cb), 10)    
-
-
-
-        def run(self):
-            if not len(self.commands):
-                return
-            self.counter = 0
-            item = self.commands[0]
-            self.window.show_input_panel(item.prompt, item.default, self.call, None, None)
-            
-
-#Cut here            
     def run(self, **args):
-        # config = JsonSettings()  
-        # config.data = '{"dom": "otwarty", "fuck":"me", "help":[{"value": "ąąąą"}]}'
-        # print(config.data)  
-        # print(type(config.data))
+
         def mu(result):
             print(result)
 
         def vc(value):
             return re.match(r'^[a-zA-Z]\w+$',value) 
 
-        chain = self.AskChain(self.window, mu)
+        chain = AskChain(self.window, mu)
+        chain.add("Select focus", "key5", [['lick','select lick'],'second', 'third'])
         chain.add("First", "key", "ciułała")
-        chain.add("Second", "key3", "kardaśmon", vc)
+        chain.add("Second", "key3", "kardaśmon", vc, errorType='error', errorMessage="Ni ni ni")
         chain.add("Third", "ming", ['first','second', 'third'])
         chain.add("Select focus", "key5", ['lick','second', 'third'])
         chain.run()
