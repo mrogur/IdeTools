@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"get",
+				"getTemplateFiles"
+			],
+			[
+				"temp",
+				"templatePath"
+			],
+			[
+				"co",
+				"commands"
+			],
+			[
+				"A",
+				"AskChainItem"
+			],
+			[
+				"pp",
+				"pprint"
+			],
+			[
+				"va",
+				"validatorCallback"
+			],
+			[
 				"tem",
 				"templateName"
 			],
@@ -48,61 +72,50 @@
 	"buffers":
 	[
 		{
-			"contents": "import sublime, sublime_plugin, os, sys, re\n\nfrom .Project import Project\n\nclass PhpProject(Project):\n    # def __init__(self, window):\n    #     super().__init__(window)\n    pass\n",
-			"file": "projects/PhpProject.py",
-			"file_size": 180,
-			"file_write_time": 130133674630000000,
-			"settings":
-			{
-				"buffer_size": 180,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "helpers/JsonSettings.py",
-			"settings":
-			{
-				"buffer_size": 1393,
-				"line_ending": "Unix"
-			}
-		},
-		{
 			"file": "IdeTools.py",
 			"settings":
 			{
-				"buffer_size": 939,
+				"buffer_size": 2768,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/php/composer/composer.json",
+			"file": "Default (OSX).sublime-keymap",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 137,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/php/composer/phpunit.xml",
+			"file": "templates/php/composer/src/index.php",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 15,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/php/composer/bootstrap.php",
+			"file": "helpers/AskChain.py",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 2760,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "helpers/TemplateLoader.py",
+			"file": "helpers/TemplateTools.py",
 			"settings":
 			{
-				"buffer_size": 649,
+				"buffer_size": 1081,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "plan.txt",
+			"settings":
+			{
+				"buffer_size": 1121,
 				"line_ending": "Unix"
 			}
 		}
@@ -110,9 +123,17 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 205.0,
+		"height": 73.0,
 		"selected_items":
 		[
+			[
+				"remo",
+				"Package Control: Remove Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
 			[
 				"rem",
 				"Package Control: Remove Package"
@@ -134,11 +155,11 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 435.0
+		"width": 579.0
 	},
 	"console":
 	{
-		"height": 235.0,
+		"height": 121.0,
 		"history":
 		[
 			"window.run_command('ide_tools')",
@@ -187,11 +208,23 @@
 	},
 	"file_history":
 	[
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/plan.txt",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/Default (OSX).sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/PhpProject.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/JsonSettings.py",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeTools.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/Project.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/plan.txt",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Main.sublime-menu",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/TemplateTools.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Default (OSX).sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Default(OSX).sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Default.sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/composer.json",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/phpunit.xml",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/bootstrap.php",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/TemplateLoader.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/Default (OSX).sublime-keymap",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeTools.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer.json",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/bootstrap.php",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/phpunit.xml",
@@ -204,11 +237,9 @@
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/project.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Settings/SideBarEnhancements.json",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/LiveReload/LiveReload.py",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/LiveReload.sublime-settings",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/pathutil/pathutil.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/project/project.py",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/project/__init__.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/pathutil/__init__.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/MyPlug/MyPlug.sublime-project",
@@ -232,6 +263,12 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"            \n",
+			"validatorCallback",
+			"commands",
+			"validatorCallback",
+			"projectName",
+			"assignName",
 			"data",
 			"_data",
 			"IdeToolsConfig",
@@ -272,101 +309,45 @@
 	"groups":
 	[
 		{
-			"selected": 6,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "projects/PhpProject.py",
+					"file": "IdeTools.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 180,
+						"buffer_size": 2768,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								175,
-								175
+								1825,
+								1825
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 473.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "helpers/JsonSettings.py",
-					"semi_transient": false,
+					"file": "Default (OSX).sublime-keymap",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 1393,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								610,
-								610
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 74.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "IdeTools.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 939,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								546,
-								546
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "templates/php/composer/composer.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
+						"buffer_size": 137,
 						"regions":
 						{
 						},
@@ -388,47 +369,20 @@
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "templates/php/composer/phpunit.xml",
+					"buffer": 2,
+					"file": "templates/php/composer/src/index.php",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 15,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/XML/XML.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "templates/php/composer/bootstrap.php",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
+								14,
+								14
 							]
 						],
 						"settings":
@@ -442,25 +396,83 @@
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "helpers/TemplateLoader.py",
+					"buffer": 3,
+					"file": "helpers/AskChain.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 649,
+						"buffer_size": 2760,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								624,
-								624
+								2560,
+								2560
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Python/Python.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 940.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "helpers/TemplateTools.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1081,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								65,
+								489
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "plan.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1121,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1115,
+								1115
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -513,6 +525,14 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"pro",
+				"projects/Project.py"
+			],
+			[
+				"pr",
+				"projects/Project.py"
+			],
 			[
 				"",
 				"helpers/TemplateLoader.py"
