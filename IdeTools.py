@@ -27,6 +27,7 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
                 self.filename = filename
                 self.targetPath = None
                 self.fileObj = None
+                self.buffer = None
 
             def __repr__(self):
                 return os.path.join(self.root, self.relativePath, self.filename)
@@ -34,13 +35,21 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
             def read(self):
                 if not self.targetPath:
                     raise IOError("Target path is not set")
-                try:    
+                try:
                     self.fileObj = open(os.path.join(self.targetPath, self.filename), encoding='utf-8')
-                    return self.fileObj.read()
+                    self.buffer = self.fileObj.read()
+                    self.fileObj.close()
+
+                    return True
                 except IOError as e:
                     print(e)
                     return False   
 
+            def save(self):
+                open(os.path.join(self.targetPath, self.filename)
+                        ,encoding='utf-8'
+                        ,mode='w').write(self.buffer)                    
+                    
         class Template(object):
             def __init__(self, context, name, projectPath):
                 self.context = context
@@ -97,19 +106,21 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
 
             def process(self):
                 for f in self.files:
-                    print(f)
-                    buffer = f.read()
-                    if buffer:
-                        print(buffer)
+                    if f.read():
+                        f.buffer= "#Alkomalko"+f.buffer
+
+                        f.save()
 
                         
 
         
-                
+        self.window.create_output_panel("haha")
+        self.window.run_command('show_panel', {"panel": "output.haha"})        
         template = Template('php','composer', '/Users/mrogur/Code/test/vc')
         template.scanTemplateFiles()
         template.copyTemplateFiles()
         template.process()
+
         #template.copyFiles()
         # def mu(result):
         #     print(result)

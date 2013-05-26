@@ -62,5 +62,4 @@ class Project(object):
 
 	def openProject(self):
 		sublime.active_window().set_project_data(self.projectData)
-		print("project created")
-		print(sublime.active_window().project_data())
+
