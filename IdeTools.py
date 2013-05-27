@@ -19,14 +19,6 @@ class CreateProjectCommand(sublime_plugin.WindowCommand):
 
 class IdeToolsCommand(sublime_plugin.WindowCommand):
     def run(self, **args):
-
-    
-
-
-  
-                        
-
-        
         #self.window.create_output_panel("haha")
         #self.window.run_command('show_panel', {"panel": "output.haha"})        
         # template = Template('php','composer', '/Users/mrogur/Code/test/vc')
