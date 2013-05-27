@@ -1,6 +1,6 @@
 from IdeTools.tools.Bundle import Bundle
 
-class PhpBundle(Bundle):
+class SublimeBundle(Bundle):
     def __init__(self,path, options):
-        print("Php bundle")
+        print("Sublime bundle")
         super().__init__(path, options)

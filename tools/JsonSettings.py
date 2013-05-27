@@ -9,7 +9,8 @@ class JsonSettings:
 
 
     def load(self, path=None):
-        path = path if path else self.path
+
+        self.path = path if path else self.path
 
         if not path:
             raise ValueError("No path specified to load")

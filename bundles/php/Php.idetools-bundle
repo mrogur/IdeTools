@@ -1,3 +1,6 @@
 {
-    "name": "PHP"
+    "bundle": "php",
+    "name": "PHP",
+    "description": "This is Php bundle",
+    "version": 1.0
 }

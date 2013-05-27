@@ -1,6 +1,6 @@
 import sublime, sublime_plugin, os, sys,  json
 
-from ..helpers.JsonSettings import JsonSettings
+from .JsonSettings import JsonSettings
 
 
 class Project(object):

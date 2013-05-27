@@ -1,3 +1,6 @@
 {
-    "name": "SublimeText"
+    "bundle": "sublime",
+    "name": "SublimeText",
+    "description": "This is SublimeText bundle",
+    "version": "1.0"
 }

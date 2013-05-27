@@ -1,0 +1,2 @@
+class IdeToolsError(Exception):
+    pass
