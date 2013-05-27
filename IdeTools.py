@@ -49,14 +49,26 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
                 open(os.path.join(self.targetPath, self.filename)
                         ,encoding='utf-8'
                         ,mode='w').write(self.buffer)                    
-                    
+        
+        
+        class BundleTemplate(object):
+            """Class scanning bundles for templates"""
+            def __init__(self):
+                self.bundlesDir = os.path.join(sublime.packages_path(), 'IdeTools', 'bundles')
+                self.config = JsonSettings()
+            def getBundles(self):
+                    pass    
+                
+                
+                
+
         class Template(object):
             def __init__(self, context, name, projectPath):
                 self.context = context
                 self.name = name
                 self.projectPath = projectPath
 
-                templatesFolder = os.path.join('IdeTools','templates',context,name)
+                templatesFolder = os.path.join('IdeTools','bundles',context,'templates',name)
 
 
                 self.sublimePackagesTemplatesPath = os.path.join(sublime.packages_path()
@@ -108,7 +120,6 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
                 for f in self.files:
                     if f.read():
                         f.buffer= "#Alkomalko"+f.buffer
-
                         f.save()
 
                         
