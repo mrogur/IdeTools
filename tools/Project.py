@@ -4,6 +4,7 @@ from .JsonSettings import JsonSettings
 
 
 class Project(object):
+	
 	def __init__(self, window):
 		self.window = window
 		self.settings = self.loadSettings()

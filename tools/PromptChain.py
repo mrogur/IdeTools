@@ -1,6 +1,8 @@
 import sublime
 
-class AskChainItem(object):
+from ..IdeToolsError import IdeToolsError
+
+class PromptChainItem(object):
     def __init__(self, prompt, key, default='', validatorCallback=None, errorMessage='', errorType='status'):
         
 
@@ -34,7 +36,7 @@ class AskChainItem(object):
 
         self.validatorCallback = validatorCallback if hasattr(validatorCallback, '__call__') else emptyValidator
 
-class AskChain(object):
+class PromptChain(object):
     def __init__(self, window, onFinishCallback):
         self.window = window
         self.commands = []
@@ -43,8 +45,20 @@ class AskChain(object):
         self.onFinishCallback = onFinishCallback
         
     def add(self, prompt, key, default='', validatorCallback=None, errorMessage='', errorType='status'):
-        item = AskChainItem(prompt, key, default, validatorCallback, errorMessage, errorType)
+        item = PromptChainItem(prompt, key, default, validatorCallback, errorMessage, errorType)
         self.commands.append(item)
+
+    def addItem(self, item):
+        if not isinstance(item, PromptChainItem):
+            raise IdeToolsError("Can't add item to prompt chain")
+        self.commands.append(item)
+
+    def insertItem(self, item, atPosition=None, afterItem=None):
+        if not isinstance(item, PromptChainItem) 
+            raise IdeToolsError("Can't add item to prompt chain")
+
+            
+
 
     def showInputPanel(self, item, cb):
         self.window.show_input_panel(item.prompt, item.default, cb, None, None)        
