@@ -4,6 +4,46 @@
 		"selected_items":
 		[
 			[
+				"vali",
+				"validation"
+			],
+			[
+				"show",
+				"showQuickPanel"
+			],
+			[
+				"di",
+				"dictionary"
+			],
+			[
+				"Prom",
+				"PromptChainItem"
+			],
+			[
+				"Pro",
+				"PromptChainItem"
+			],
+			[
+				"bundleC",
+				"bundleClassName"
+			],
+			[
+				"bundles",
+				"bundlesDir"
+			],
+			[
+				"bun",
+				"bundleName"
+			],
+			[
+				"__",
+				"__init__"
+			],
+			[
+				"d",
+				"defs	Method"
+			],
+			[
 				"copy",
 				"copyTemplateFiles"
 			],
@@ -68,10 +108,6 @@
 				"reload"
 			],
 			[
-				"Pro",
-				"ProjectException"
-			],
-			[
 				"load",
 				"loadSettings"
 			]
@@ -80,61 +116,34 @@
 	"buffers":
 	[
 		{
-			"contents": "import sublime, sublime_plugin, sys, os, re, imp, pprint, shutil, ftplib\n\n#Some imports reload not be available in retail \nimport IdeTools.projects.Project\nimp.reload(IdeTools.projects.Project)\nimport IdeTools.helpers.JsonSettings\nimp.reload(IdeTools.helpers.JsonSettings)\n\nfrom pprint import pprint\nfrom .projects.Project import Project\nfrom .projects.PhpProject import PhpProject\nfrom .helpers.JsonSettings import JsonSettings\nfrom .helpers.AskChain import AskChain\n#from .helpers.TemplateTools import *\n\nclass CreateProjectCommand(sublime_plugin.WindowCommand):\n    def run(self):\n        tools = Project(self.window) \n        tools.create()\n\nclass IdeToolsCommand(sublime_plugin.WindowCommand):\n    def run(self, **args):\n        class TemplateFile(object):\n            def __init__(self, root, relativePath, filename):\n                self.root = root\n                self.relativePath = relativePath\n                self.filename = filename\n\n            def __repr__(self):\n                return os.path.join(self.root, self.relativePath, self.filename)\n\n        class Template(object):\n            def __init__(self, context, name, projectPath):\n                self.context = context\n                self.name = name\n                self.projectPath = projectPath\n\n                templatesFolder = os.path.join('IdeTools','templates',context,name)\n\n\n                self.sublimePackagesTemplatesPath = os.path.join(sublime.packages_path()\n                                                    ,templatesFolder)\n\n                self.sublimeUserTemplatesPath = os.path.join(sublime.packages_path()\n                                                    ,'User'\n                                                    ,templatesFolder)\n                \n                self.userDirTemplatesPath = os.path.join(os.getenv('USERPROFILE') or os.getenv('HOME')\n                                                    ,'.'+templatesFolder)\n\n\n                self.projectPath = projectPath\n                \n                self.files = []\n                #print(self.sublimePackagesTemplatesPath, self.sublimeUserTemplatesPath, self.userDirTemplatesPath)\n\n            def scanTemplateFiles(self):\n                for (root, dirs, files) in os.walk(self.sublimePackagesTemplatesPath):\n                    for file in files:\n                        self.files.append(self.getTemplateFile(root, file))\n\n                pprint(self.files)            \n\n            def getTemplateFile(self, root, file):\n                dirs = [ self.sublimeUserTemplatesPath\n                        ,self.userDirTemplatesPath]\n\n                relativePath = root.replace(\n                    self.sublimePackagesTemplatesPath, '').strip(os.sep)\n\n                for d in dirs:\n                    path = os.path.join(d, relativePath, file)\n                    if os.path.exists(path):\n                        root = d \n\n                return TemplateFile(root, relativePath, file)        \n            \n            def copyTemplateFiles(self):\n                for file in self.files:\n                    targetDir = os.path.join(self.projectPath, file.relativePath)\n                    if not os.path.exists(targetDir):\n                        os.makedirs(targetDir)                \n                    shutil.copy(str(file), targetDir)            \n\n            def process(self, file):\n                pass\n                        \n\n        \n                \n        template = Template('php','composer', '/Users/mrogur/Code/test/vc')\n        template.scanTemplateFiles()\n        template.copyTemplateFiles()\n        #template.copyFiles()\n        # def mu(result):\n        #     print(result)\n\n        # def vc(value):\n        #     return re.match(r'^[a-zA-Z]\\w+$',value) \n\n        # chain = AskChain(self.window, mu)\n        # chain.add(\"Select focus\", \"key5\", [['lick','select lick'],'second', 'third'])\n        # chain.add(\"First\", \"key\", \"ciułała\")\n        # chain.add(\"Second\", \"key3\", \"kardaśmon\", vc, errorType='error', errorMessage=\"Ni ni ni\")\n        # chain.add(\"Third\", \"ming\", ['first','second', 'third'])\n        # chain.add(\"Select focus\", \"key5\", ['lick','second', 'third'])\n        # chain.run()\n\n\nclass CreatePhpProjectCommand(sublime_plugin.WindowCommand):\n    def run(self):\n        tools = PhpProject(self.window)\n        tools.create()  \n        print(\"foo me\")",
 			"file": "IdeTools.py",
-			"file_size": 4329,
-			"file_write_time": 130139916180000000,
 			"settings":
 			{
-				"buffer_size": 4352,
+				"buffer_size": 2707,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/php/composer/bootstrap.php",
+			"file": "tools/Project.py",
 			"settings":
 			{
-				"buffer_size": 31,
+				"buffer_size": 2280,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/php/composer/src/data/settings.json",
+			"file": "IdeTools.sublime-settings",
 			"settings":
 			{
-				"buffer_size": 0,
+				"buffer_size": 51,
 				"line_ending": "Unix"
 			}
 		},
 		{
-			"file": "templates/php/composer/src/index.php",
+			"file": "tools/PromptChain.py",
 			"settings":
 			{
-				"buffer_size": 15,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "helpers/AskChain.py",
-			"settings":
-			{
-				"buffer_size": 2760,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "helpers/TemplateTools.py",
-			"settings":
-			{
-				"buffer_size": 1081,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "plan.txt",
-			"settings":
-			{
-				"buffer_size": 1121,
+				"buffer_size": 5690,
 				"line_ending": "Unix"
 			}
 		}
@@ -142,9 +151,17 @@
 	"build_system": "",
 	"command_palette":
 	{
-		"height": 73.0,
+		"height": 375.0,
 		"selected_items":
 		[
+			[
+				"syntaxjson",
+				"Set Syntax: JSON"
+			],
+			[
+				"synjso",
+				"Set Syntax: JSON"
+			],
 			[
 				"remo",
 				"Package Control: Remove Package"
@@ -174,13 +191,14 @@
 				"Package Control: Install Package"
 			]
 		],
-		"width": 579.0
+		"width": 435.0
 	},
 	"console":
 	{
 		"height": 125.0,
 		"history":
 		[
+			"os.system('clear')",
 			"window.run_command('ide_tools')",
 			"window.run_command('create_php_project')",
 			"os.system('clear')",
@@ -227,23 +245,46 @@
 	},
 	"file_history":
 	[
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/__init__.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/Bundle.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/PromptChain.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/Project.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/bundles/sublime/SublimeBundle.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/bundles/php/PhpBundle.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/AskChain.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/SideBarGit/SideBarGit.sublime-settings",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/bundles/php/Php.idetools-bundle",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/bundles/sublime/Sublime.idetools-bundle",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/JsonSettings.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/Template.py",
+		"/Users/mrogur/plan.txt",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Project.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/.gitignore",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Bundle.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeToolsError.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/IdeToolsError.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/bundles/sublime/SublimeTextBundle.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/bootstrap.php",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/phpunit.xml",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/Project.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeTools.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/src/data/settings.json",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/src/index.php",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/composer.json",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/AskChain.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/TemplateTools.py",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/plan.txt",
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/Python/os_path_join.sublime-snippet",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/PhpProject.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/JsonSettings.py",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/projects/Project.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/LiveReload/LiveReload.sublime-settings",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/plan.txt",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Main.sublime-menu",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/TemplateTools.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Default (OSX).sublime-keymap",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Default(OSX).sublime-keymap",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/Default.sublime-keymap",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/composer.json",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/phpunit.xml",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer/bootstrap.php",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/helpers/TemplateLoader.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/SublimeCodeIntel/Default (OSX).sublime-keymap",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/IdeTools.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/composer.json",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/bootstrap.php",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/templates/php/phpunit.xml",
@@ -279,9 +320,17 @@
 	},
 	"find_state":
 	{
-		"case_sensitive": true,
+		"case_sensitive": false,
 		"find_history":
 		[
+			"requiredItems",
+			"checkSet",
+			"AskChain",
+			"bundlPath",
+			"scanBundles",
+			"SublimeBundle",
+			"Bundle",
+			"helpers",
 			"getFileOverride",
 			"path",
 			"dir",
@@ -328,18 +377,19 @@
 		"regex": false,
 		"replace_history":
 		[
+			"PromptChain",
 			"Project"
 		],
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": true,
+		"whole_word": false,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 3,
 			"sheets":
 			[
 				{
@@ -348,15 +398,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4352,
+						"buffer_size": 2707,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1929,
-								1929
+								578,
+								578
 							]
 						],
 						"settings":
@@ -366,31 +416,32 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1472.0,
+						"translation.y": 1103.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "templates/php/composer/bootstrap.php",
+					"file": "tools/Project.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 31,
+						"buffer_size": 2280,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								31,
-								31
+								803,
+								803
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -400,11 +451,11 @@
 				},
 				{
 					"buffer": 2,
-					"file": "templates/php/composer/src/data/settings.json",
-					"semi_transient": false,
+					"file": "IdeTools.sublime-settings",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 0,
+						"buffer_size": 51,
 						"regions":
 						{
 						},
@@ -427,46 +478,19 @@
 				},
 				{
 					"buffer": 3,
-					"file": "templates/php/composer/src/index.php",
+					"file": "tools/PromptChain.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15,
+						"buffer_size": 5690,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								14,
-								14
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/PHP/PHP.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "helpers/AskChain.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2760,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2560,
-								2560
+								2681,
+								2681
 							]
 						],
 						"settings":
@@ -476,63 +500,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1061.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "helpers/TemplateTools.py",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1081,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								65,
-								489
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Python/Python.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "plan.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1121,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1115,
-								1115
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 168.0,
+						"translation.y": 1367.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -542,7 +510,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 23.0
+		"height": 37.0
 	},
 	"input":
 	{
@@ -571,6 +539,14 @@
 		]
 	},
 	"menu_visible": true,
+	"output.Haha":
+	{
+		"height": 0.0
+	},
+	"output.haha":
+	{
+		"height": 126.0
+	},
 	"project": "IdeTools.sublime-project",
 	"replace":
 	{
@@ -583,20 +559,48 @@
 		"selected_items":
 		[
 			[
-				"pro",
-				"projects/Project.py"
-			],
-			[
 				"pr",
-				"projects/Project.py"
+				"tools/Project.py"
 			],
 			[
-				"",
-				"helpers/TemplateLoader.py"
+				"pc",
+				"tools/PromptChain.py"
+			],
+			[
+				"p",
+				"tools/PromptChain.py"
+			],
+			[
+				"bun",
+				"tools/Bundle.py"
+			],
+			[
+				"bu",
+				"tools/Bundle.py"
 			],
 			[
 				"jso",
-				"helpers/JsonSettings.py"
+				"tools/JsonSettings.py"
+			],
+			[
+				"sublimebu",
+				"bundles/sublime/SublimeTextBundle.py"
+			],
+			[
+				"phpbu",
+				"bundles/php/PhpBundle.py"
+			],
+			[
+				"",
+				"IdeTools.py"
+			],
+			[
+				"pro",
+				"Project.py"
+			],
+			[
+				"it",
+				"IdeTools.py"
 			]
 		],
 		"width": 0.0

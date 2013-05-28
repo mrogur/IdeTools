@@ -19,6 +19,9 @@ class CreateProjectCommand(sublime_plugin.WindowCommand):
 
 class IdeToolsCommand(sublime_plugin.WindowCommand):
     def run(self, **args):
+
+        project = Project(self.window)
+        project.create()
         #self.window.create_output_panel("haha")
         #self.window.run_command('show_panel', {"panel": "output.haha"})        
         # template = Template('php','composer', '/Users/mrogur/Code/test/vc')
@@ -34,37 +37,47 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
   
 
         #template.copyFiles()
-        def mu(result):
-            print(result)
+        # def mu(result):
+        #     print(result)
 
-        def vc(value):
-            return re.match(r'^[a-zA-Z]\w+$',value) 
+        # def vc(value):
+        #     return re.match(r'^[a-zA-Z]\w+$',value) 
 
-        chain = PromptChain(self.window, mu)
+        # chain = PromptChain(self.window, mu)
         
-        chain.add("Select focus", "key8", [['lick','select lick'],'second', 'third'])
-        chain.add("First", "key", "ciułała")
-        chain.add("Second", "key3", "kardaśmon", vc, errorType='error', errorMessage="Ni ni ni")
-        chain.add("Third", "ming", ['first','second', 'third'])
-        chain.add("Name", "key99", "none")
+        # chain.add("Select focus", "key8", [['lick','select lick'],'second', 'third'])
+        # chain.add("First", "key", "ciułała")
+        # chain.add("Second", "key3", "kardaśmon", vc, errorType='error', errorMessage="Ni ni ni")
+        # chain.add("Third", "ming", ['first','second', 'third'])
+        # chain.add("Name", "key99", "none")
 
-        def fakeAdd(chain):
-            items =[PromptChainItem('hello','mile','rocks')]
-            activeItem = chain.commands[chain.counter]
-            chain.insertItems(items,activeItem)
+        # def fakeAdd(chain):
+        #     items =[PromptChainItem('hello','mile','rocks')]
+        #     activeItem = chain.commands[chain.counter]
+        #     chain.insertItems(items,activeItem)
 
-        chain.on('key', 'ciułała', fakeAdd)
+        # chain.on('key', 'ciułała', fakeAdd)
 
-        def fakeAdd2(chain):
-            items = [{
-                'prompt': 'Daj se siana',
-                'key': 'klucz_do_szczescia',
-            }]
-            activeItem = chain.commands[chain.counter]
-            chain.insertItems(items, activeItem)
+        # def fakeAdd2(chain):
+        #     items = [{
+        #         'prompt': 'Daj se siana',
+        #         'key': 'klucz_do_szczescia'
+        #     },
+        #     {
+        #         'prompt': "Podaj powód dla którego nie miałbym cię zabić",
+        #         'key': 'klucz_do_klozetu'
+        #     },
+        #     {
+        #         'prompt': "i co?",
+        #         'key': 'klucz_do_klucza',
+        #         'default': [['a','a'],'b','c',['d','eee']]
 
-        chain.on('key8',0, fakeAdd2)    
-        chain.run()
+        #     }]
+        #     activeItem = chain.getActiveItem()
+        #     chain.insertItems(items, activeItem)
+
+        # chain.on('key8',0, fakeAdd2)    
+        # chain.run()
 
 
 

@@ -1,33 +1,51 @@
 import sublime, sublime_plugin, os, sys,  json
 
 from .JsonSettings import JsonSettings
+from .PromptChain import *
 
 
 class Project(object):
 	
 	def __init__(self, window):
 		self.window = window
-		self.settings = self.loadSettings()
+		self.settings = None
 		self.projectData = None
 		self.projectFolder = None
 		self.projectName = None
 		self.projectPath = None
-		#self.config = IdeToolsConfig()
+		
+		self.loadSettings()
+
 	def create(self):		
 		self.window.run_command("prompt_open_folder")
 		self.window = sublime.active_window()
 		self.projectData = self.window.project_data()
-		self.promptName()
+
+		prompts = [
+			{
+				"prompt": "Insert project folder name: (new folder will be created)",
+				"key": "projectFolder"		
+			},
+			{
+				"prompt": "Insert project name:",
+				"key": "projectName"		
+			}
+		]
+		self.promptChain = PromptChain(self.window, self.makeProject)
+		self.promptChain.addList(prompts)
+		self.promptChain.run()
+
 
 	def loadSettings(self):
-		return sublime.load_settings('IdeTools.sublime-settings')
+		self.settings = sublime.load_settings('IdeTools.sublime-settings')
 
-	def promptName(self, name=''):
-		self.window.show_input_panel("Project name:",name,self.promptFolder, None, None)
+
+	# def promptName(self, name=''):
+	# 	self.window.show_input_panel("Project name:",name,self.promptFolder, None, None)
 		
-	def promptFolder(self, name):
-		self.projectName = name	
-		self.window.show_input_panel("Project folder:",'',self.assignFolderName, None, None)
+	# def promptFolder(self, name):
+	# 	self.projectName = name	
+	# 	self.window.show_input_panel("Project folder:",'',self.assignFolderName, None, None)
 
 	def assignFolderName(self, name):
 		if re.match(r'^[a-zA-Z]\w+$',name): 
@@ -37,23 +55,26 @@ class Project(object):
 			sublime.message_dialog("Project fol must not have spaces")
 			self.promptName(name)			
 
-	def checkName(self, name):
-		if name=='':
-			return name
+	def checkFolderName(self, name):
 		return re.match(r'^[a-zA-Z]\w+$',name)	
 
-	def makeProject(self):
-		path = self.projectData['folders'][0]['path']
-		self.projectPath = os.path.join(path, self.projectFolder)
-		self.saveProject()
+	def makeProject(self, promptResult):
+		"""Vars acquired from PromptChain"""
+		projectFolder = promptResult['projectFolder']
+		projectName = promptResult['projectName']
 
-	def saveProject(self):
+		if not (projectFolder and projectName):
+			raise IdeToolsError("No apropriate project data")
+
+		parentDir = self.projectData['folders'][0]['path']
+		projectPath = os.path.join(parentDir, projectFolder)
+
 		try: 
-			os.mkdir(self.projectPath)
-			self.projectData['folders'][0]['path'] = self.projectPath
-			#os.chdir(self.projectPath)
+			os.mkdir(projectPath)
+			self.projectData['folders'][0]['path'] = projectPath
+			
 			jsonSettings = JsonSettings(
-				path=os.path.join(self.projectPath, self.projectName+'.sublime-settings'),
+				path=os.path.join(projectPath, projectName+'.sublime-project'),
 				data=self.projectData
 			)
 			jsonSettings.save()

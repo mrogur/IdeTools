@@ -47,9 +47,20 @@ class PromptChain(object):
         self.onFinishCallback = onFinishCallback
         self.events = []
         
+    def getActiveItem(self):
+        if not len(self.commands):
+            return None
+        try:
+            return self.commands[self.counter]    
+        except IndexError:
+            return None    
+
+    
+
     def add(self, prompt:str, key:str, default='', validatorCallback=None, errorMessage='', errorType='status'):
         item = PromptChainItem(prompt, key, default, validatorCallback, errorMessage, errorType)
         self.commands.append(item)
+
 
 
     def _createItemFromDictionary(self, item:dict):
@@ -64,6 +75,8 @@ class PromptChain(object):
             raise IdeToolsError("Wrong dictionary keys in command list item")   
         return PromptChainItem(**item)
 
+
+
     def addList(self, items:list):
         for item in items:
             try:
@@ -71,9 +84,8 @@ class PromptChain(object):
             except IdeToolsError as e:
                 print(e)
             else:
-                self.addItem(chainItem)
-            finally:
-                raise e                
+                self.commands.append(chainItem)
+            
                 
                 
     def addItems(self, items:list):
@@ -100,6 +112,9 @@ class PromptChain(object):
                 else:
                     index = self.counter+1
                 self.commands.insert(index,item)                
+    """
+        Even handle methods
+    """
 
     def on(self, key, value, callback):
         if not hasattr(callback, '__call__'):
@@ -112,6 +127,9 @@ class PromptChain(object):
             if k==key and v==value:
                 cb(self) 
 
+    """
+        Prompt related methods
+    """
 
     def showInputPanel(self, item, cb):
         value = item.value if item.value else item.default 
