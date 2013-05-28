@@ -5,7 +5,7 @@ import sublime, sublime_plugin, sys, os, re, imp, pprint, shutil, ftplib
 
 from pprint import pprint
 from .tools.JsonSettings import JsonSettings
-from .tools.AskChain import AskChain
+from .tools.PromptChain import *
 from .tools.Project import Project
 from .tools.Template import *
 from .tools.Bundle import *
@@ -26,27 +26,46 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
         # template.copyTemplateFiles()
         # template.process()
 
-        bundle = Bundles()
-        b = bundle.loadBundle('php')
-        print(b)
+        # bundle = Bundles()
+        # b = bundle.loadBundle('php')
+        # print(b)
 
         
   
 
         #template.copyFiles()
-        # def mu(result):
-        #     print(result)
+        def mu(result):
+            print(result)
 
-        # def vc(value):
-        #     return re.match(r'^[a-zA-Z]\w+$',value) 
+        def vc(value):
+            return re.match(r'^[a-zA-Z]\w+$',value) 
 
-        # chain = AskChain(self.window, mu)
-        # chain.add("Select focus", "key5", [['lick','select lick'],'second', 'third'])
-        # chain.add("First", "key", "ciułała")
-        # chain.add("Second", "key3", "kardaśmon", vc, errorType='error', errorMessage="Ni ni ni")
-        # chain.add("Third", "ming", ['first','second', 'third'])
-        # chain.add("Select focus", "key5", ['lick','second', 'third'])
-        # chain.run()
+        chain = PromptChain(self.window, mu)
+        
+        chain.add("Select focus", "key8", [['lick','select lick'],'second', 'third'])
+        chain.add("First", "key", "ciułała")
+        chain.add("Second", "key3", "kardaśmon", vc, errorType='error', errorMessage="Ni ni ni")
+        chain.add("Third", "ming", ['first','second', 'third'])
+        chain.add("Name", "key99", "none")
+
+        def fakeAdd(chain):
+            items =[PromptChainItem('hello','mile','rocks')]
+            activeItem = chain.commands[chain.counter]
+            chain.insertItems(items,activeItem)
+
+        chain.on('key', 'ciułała', fakeAdd)
+
+        def fakeAdd2(chain):
+            items = [{
+                'prompt': 'Daj se siana',
+                'key': 'klucz_do_szczescia',
+            }]
+            activeItem = chain.commands[chain.counter]
+            chain.insertItems(items, activeItem)
+
+        chain.on('key8',0, fakeAdd2)    
+        chain.run()
+
 
 
 class CreatePhpProjectCommand(sublime_plugin.WindowCommand):
