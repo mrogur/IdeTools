@@ -4,12 +4,12 @@
 		"selected_items":
 		[
 			[
-				"vali",
-				"validation"
+				"show",
+				"showOutputPanel"
 			],
 			[
-				"show",
-				"showQuickPanel"
+				"vali",
+				"validation"
 			],
 			[
 				"di",
@@ -119,23 +119,7 @@
 			"file": "IdeTools.py",
 			"settings":
 			{
-				"buffer_size": 2707,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "tools/Project.py",
-			"settings":
-			{
-				"buffer_size": 2280,
-				"line_ending": "Unix"
-			}
-		},
-		{
-			"file": "IdeTools.sublime-settings",
-			"settings":
-			{
-				"buffer_size": 51,
+				"buffer_size": 2778,
 				"line_ending": "Unix"
 			}
 		},
@@ -143,7 +127,23 @@
 			"file": "tools/PromptChain.py",
 			"settings":
 			{
-				"buffer_size": 5690,
+				"buffer_size": 6236,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tools/Project.py",
+			"settings":
+			{
+				"buffer_size": 2172,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "tools/JsonSettings.py",
+			"settings":
+			{
+				"buffer_size": 1737,
 				"line_ending": "Unix"
 			}
 		}
@@ -245,9 +245,9 @@
 	},
 	"file_history":
 	[
+		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/PromptChain.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/__init__.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/Bundle.py",
-		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/PromptChain.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/tools/Project.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/bundles/sublime/SublimeBundle.py",
 		"/Users/mrogur/Library/Application Support/Sublime Text 3/Packages/IdeTools/bundles/php/PhpBundle.py",
@@ -308,7 +308,7 @@
 	],
 	"find":
 	{
-		"height": 37.0
+		"height": 27.0
 	},
 	"find_in_files":
 	{
@@ -323,6 +323,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"validatorCallback",
 			"requiredItems",
 			"checkSet",
 			"AskChain",
@@ -389,7 +390,7 @@
 	"groups":
 	[
 		{
-			"selected": 3,
+			"selected": 1,
 			"sheets":
 			[
 				{
@@ -398,15 +399,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2707,
+						"buffer_size": 2778,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								578,
-								578
+								588,
+								588
 							]
 						],
 						"settings":
@@ -416,32 +417,33 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1103.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "tools/Project.py",
+					"file": "tools/PromptChain.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2280,
+						"buffer_size": 6236,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								803,
-								803
+								181,
+								181
 							]
 						],
 						"settings":
 						{
 							"syntax": "Packages/Python/Python.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -451,46 +453,47 @@
 				},
 				{
 					"buffer": 2,
-					"file": "IdeTools.sublime-settings",
-					"semi_transient": true,
+					"file": "tools/Project.py",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 51,
+						"buffer_size": 2172,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								796,
+								796
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/JavaScript/JSON.tmLanguage"
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 102.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
 				},
 				{
 					"buffer": 3,
-					"file": "tools/PromptChain.py",
+					"file": "tools/JsonSettings.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5690,
+						"buffer_size": 1737,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2681,
-								2681
+								293,
+								293
 							]
 						],
 						"settings":
@@ -500,7 +503,7 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1367.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"type": "text"
@@ -607,11 +610,11 @@
 	},
 	"select_project":
 	{
-		"height": 0.0,
+		"height": 500.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 380.0
 	},
 	"select_symbol":
 	{

@@ -1,4 +1,5 @@
 [
     {"keys": ["super+alt+control+x"], "command": "ide_tools"},
+    {"keys": ["super+alt+control+c"], "command": "ide_tools", "args":{"bundle":"sublime", "template":"default"}},
     {"keys": ["super+alt+control+z"], "command": "create_php_project"}
 ]

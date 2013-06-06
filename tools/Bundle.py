@@ -1,6 +1,42 @@
 import os, sublime
 
+
+from pprint import pprint
 from .JsonSettings import JsonSettings
+from ..IdeToolsError import IdeToolsError
+
+
+
+class BundlesIterator(object):
+    def __init__(self):
+        self.bundles = Bundles()
+        self.counter = 0
+
+    def __iter__(self):
+        return self 
+
+    def __next__(self):
+        if self.counter>=len(self.bundles.bundles):
+            raise StopIteration
+        item =  self.bundles.bundlesList[self.counter]    
+        self.counter += 1
+        return item
+
+
+class BundlesPromptMapper(BundlesIterator):
+    def __init__(self):
+        super().__init__()
+    def __next__(self):
+        item = super().__next__()
+
+        try:
+            description = item['description']
+        except IndexError:
+            description = 'No description'    
+
+        return [item['name'], description]
+
+
 
 class Bundle(object):
     def __init__(self, path, options):
@@ -12,6 +48,8 @@ class Bundle(object):
     def __repr__(self):
         return self.path+' '+self.name+' '+self.description
 
+
+
     
         
 class Bundles(object):
@@ -21,7 +59,8 @@ class Bundles(object):
     def __init__(self):
         self.bundlesDir = os.path.join(sublime.packages_path(), 'IdeTools', 'bundles')
         self.config = JsonSettings()
-        self.bundles = {}
+        self.bundles = []
+        self.bundlesList = []
         self.loadBundlesList()
 
     """Load installed bundles list and config files"""    
@@ -37,28 +76,29 @@ class Bundles(object):
                         )
                     )
                 except ValueError as e:
-                    print(e)
-                    raise e
+                    raise IdeToolsError("Loading bundle error"+e.message)
                 else:
-                    bundlePath = os.path.join(self.bundlesDir, file)
+                    # bundlePath = os.path.join(self.bundlesDir, file)
                     if 'bundle' not in self.config.data:
                         self.config.data['bundle'] = file
                         self.config.save()
 
-                    self.bundles[file] = self.config.data
+                    self.bundles.append(file)
+                    self.bundlesList.append(self.config.data)
         print(self.bundles)
+        pprint(self.bundlesList)
 
     """Dynamically loads Bundle class"""
 
     def loadBundle(self, bundleName):
         if not bundleName in self.bundles:
-                raise ValueError("No bundle with name: "+bundleName)
+                raise IdeToolsError("No bundle with name: "+bundleName)
         bundlePackage = bundleName.capitalize() + 'Bundle'
         try:
             bundleModuleName = 'IdeTools.bundles.'+bundleName+'.'+bundlePackage
             bundleModule = __import__(bundleModuleName, fromlist=[bundlePackage])
-        except ImportError as e:
-            print("No bundle installed:"+bundleName)
+        except ImportError:
+            raise IdeToolsError("No bundle installed:"+bundleName)
         else:
             bundlePath = os.path.join(self.bundlesDir, bundleName)
             bundleClass = getattr(bundleModule, bundlePackage)

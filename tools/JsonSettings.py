@@ -7,6 +7,11 @@ class JsonSettings:
 
         if data: self.data = data 
 
+    def set(self, key, value):
+        self.data[key] = value
+
+    def get(self, key):
+        return self.data[key]
 
     def load(self, path=None):
 

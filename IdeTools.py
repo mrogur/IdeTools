@@ -1,6 +1,8 @@
-import sublime, sublime_plugin, sys, os, re, imp, pprint, shutil, ftplib
+import sublime, sublime_plugin, sys, os, re, imp, pprint
 
 #Some imports reload not be available in retail 
+
+import IdeTools.tools.Project
 
 
 from pprint import pprint
@@ -19,11 +21,17 @@ class CreateProjectCommand(sublime_plugin.WindowCommand):
 
 class IdeToolsCommand(sublime_plugin.WindowCommand):
     def run(self, **args):
+        self._reload()
+        print (args)
+        project = Project(self.window, args)
+        project.assignBundle()
 
-        project = Project(self.window)
-        project.create()
-        #self.window.create_output_panel("haha")
-        #self.window.run_command('show_panel', {"panel": "output.haha"})        
+        
+        # project.create()
+        # view = self.window.create_output_panel("haha")
+        # view.run_command('insert', {'characters': 'text'})
+        # self.window.run_command('show_panel', {"panel": "output.haha"})        
+
         # template = Template('php','composer', '/Users/mrogur/Code/test/vc')
         # template.scanTemplateFiles()
         # template.copyTemplateFiles()
@@ -78,7 +86,9 @@ class IdeToolsCommand(sublime_plugin.WindowCommand):
 
         # chain.on('key8',0, fakeAdd2)    
         # chain.run()
-
+    
+    def _reload(self):
+        imp.reload(IdeTools.tools.Project)
 
 
 class CreatePhpProjectCommand(sublime_plugin.WindowCommand):

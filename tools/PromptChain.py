@@ -2,8 +2,9 @@ import sublime
 
 from ..IdeToolsError import IdeToolsError
 
+
 class PromptChainItem(object):
-    def __init__(self, prompt, key, default='', validatorCallback=None, errorMessage='', errorType='status'):
+    def __init__(self,  key, prompt='', default='', validator=None, errorMessage='', errorType='status', description=''):
         
 
         self.prompt = prompt
@@ -11,6 +12,7 @@ class PromptChainItem(object):
         self.value = None
         self.default = default
         self.listMode = False
+        self.description = description
         self.errorMessage = errorMessage if errorMessage else "Wrong value"
 
 
@@ -23,20 +25,20 @@ class PromptChainItem(object):
             self.listMode = True
 
         def emptyValidator(name):
-            print(name)
             return True
 
         def listValidator(value):
             try:
-                x = self.default[value]
+                self.default[value]
                 return True
             except IndexError:
                 return False    
 
         if self.listMode: 
-            validatorCallback = listValidator 
+            validator = listValidator 
 
-        self.validatorCallback = validatorCallback if hasattr(validatorCallback, '__call__') else emptyValidator
+        self.validator = validator if hasattr(validator, '__call__') else emptyValidator
+
 
 class PromptChain(object):
     def __init__(self, window, onFinishCallback):
@@ -47,6 +49,8 @@ class PromptChain(object):
         self.onFinishCallback = onFinishCallback
         self.events = []
         
+
+        
     def getActiveItem(self):
         if not len(self.commands):
             return None
@@ -54,18 +58,19 @@ class PromptChain(object):
             return self.commands[self.counter]    
         except IndexError:
             return None    
-
+            
     
 
-    def add(self, prompt:str, key:str, default='', validatorCallback=None, errorMessage='', errorType='status'):
-        item = PromptChainItem(prompt, key, default, validatorCallback, errorMessage, errorType)
-        self.commands.append(item)
+    def add(self, key, prompt,  default='', validator=None, errorMessage='', errorType='status', description=None):
+        self.commands.append(
+            PromptChainItem(prompt, key, default, validator, errorMessage, errorType, description)
+        )
+
+    def _createItemFromDictionary(self, item):
 
 
-
-    def _createItemFromDictionary(self, item:dict):
-        requiredArgs = {'prompt', 'key'}
-        possibleArgs = {'prompt', 'key', 'default', 'validatorCallback', 'errorMessage', 'errorType'}
+        requiredArgs = {'key'}
+        possibleArgs = {'prompt', 'key', 'default', 'validator', 'errorMessage', 'errorType', 'description'}
         if not isinstance(item, dict):
             raise IdeToolsError("Item is not dictionary instance")
         keys = set(item.keys())    
@@ -77,7 +82,7 @@ class PromptChain(object):
 
 
 
-    def addList(self, items:list):
+    def addList(self, items):
         for item in items:
             try:
                 chainItem = self._createItemFromDictionary(item)
@@ -88,13 +93,13 @@ class PromptChain(object):
             
                 
                 
-    def addItems(self, items:list):
+    def addItems(self, items):
         for item in items:
             if not isinstance(item, PromptChainItem):
                 raise IdeToolsError("Can't add item to prompt chain")
         self.commands.extend(items)
 
-    def insertItems(self, items:list, afterItem=None, atIndex=None):
+    def insertItems(self, items, afterItem=None, atIndex=None):
         for item in items:
             print(type(item))
             try:
@@ -113,7 +118,7 @@ class PromptChain(object):
                     index = self.counter+1
                 self.commands.insert(index,item)                
     """
-        Even handle methods
+        Event handle methods
     """
 
     def on(self, key, value, callback):
@@ -131,19 +136,41 @@ class PromptChain(object):
         Prompt related methods
     """
 
+    def showOutputPanel(self, item):
+        msg = """
+            {0.prompt}
+            ---------------
+            {0.description}            
+        """.format(item)
+        v = self.window.create_output_panel("prompt_panel")
+        v.run_command("append", {"characters":msg})
+        self.window.run_command("show_panel", {"panel": "output.prompt_panel", "toggle":True})
+
+        # self.window.run_command('show_panel', {"panel": "output.prompt_chain"})
+
+    def hideOutputPanel(self):
+        self.window.run_command("hide_panel", {"panel": "output.prompt_panel"})
+
     def showInputPanel(self, item, cb):
-        value = item.value if item.value else item.default 
-        sublime.set_timeout(lambda: self.window.show_input_panel(item.prompt, value, cb, None, None), 10)        
+        value = item.value or item.default
+        sublime.set_timeout(lambda: self.window.show_input_panel(item.prompt, value, cb, None, None) , 10)        
+        # sublime.set_timeout(lambda: self.window.run_command('show_panel', {"panel": "output.prompt_chain"}) , 20)        
 
     def showQuickPanel(self, item, cb):
+        if (item.prompt or item.description):
+            self.showOutputPanel(item)
         sublime.set_timeout(lambda: self.window.show_quick_panel(item.default, cb), 10)    
+
+
 
 
     def call(self,value):
         try:
             item = self.commands[self.counter]
-            
-            validation = item.validatorCallback(value)
+
+
+            self.hideOutputPanel()
+            validation = item.validator(value)
             if validation:
                 self.checkEvents(item.key, value)
                 self.result[item.key] = value
@@ -153,13 +180,13 @@ class PromptChain(object):
                 item.value = value
                 errorMethod = getattr(sublime, item.errorType+'_message') 
                 errorMethod(item.errorMessage)
-
+            #self.window.run_command('hide_panel',{""})
             if item.listMode:
                 self.showQuickPanel(item, self.call)
             else:
                 self.showInputPanel(item, self.call)
 
-        except IndexError as e:
+        except IndexError:
             self.onFinishCallback(self.result) 
 
     def run(self):
